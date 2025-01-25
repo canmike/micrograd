@@ -5,7 +5,7 @@ setup(
     version="0.1.0",
     packages=find_packages(),
     install_requires=[
-        "numpy",
+        "numpy>=1.19.0",
     ],
     author="Can Michael Hucko",
     author_email="c.michaelhucko@gmail.com",
