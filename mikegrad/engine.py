@@ -1,5 +1,7 @@
 import math
 
+EPS = 1e-8
+
 
 class Value:
 
@@ -10,6 +12,9 @@ class Value:
         self._prev = set(_children)
         self._op = _op
         self.label = label
+
+    def _clip(self, data):
+        return max(EPS, min(1 - EPS, self.data))
 
     def __repr__(self):
         return f"Value(data={self.data})"
@@ -88,6 +93,17 @@ class Value:
 
         def _backward():
             self.grad += s * (1 - s) * out.grad
+
+        out._backward = _backward
+
+        return out
+
+    def log(self):
+        x = self.data
+        out = Value(math.log(self._clip(x)), (self,), "log")
+
+        def _backward():
+            self.grad += (1 / x) * out.grad
 
         out._backward = _backward
 
