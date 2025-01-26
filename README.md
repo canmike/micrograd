@@ -12,8 +12,8 @@ This repository is an implementation of Andrej Karpathy's ["Neural Networks: Zer
 
 ## TODO
 
-- Refactor the codebase
-- Publish to PyPI
+- ✅ Refactor the codebase
+- ✅ Publish to PyPI
 - More activation functions
 - More loss functions
 - Support common optimizers (SGD, Adam)
