@@ -26,7 +26,7 @@ This project implements backpropagation from scratch with additional enhancement
   - `from_list`: Convert a Python list of numerical values into a list of `Value` class instances
   - `to_list`: Convert a list of `Value` class instances back into a Python list of numerical values
   - `from_numpy`: Convert a NumPy array into a list of `Value` class instances
-  - `to_numpy`: Convert a list of `Value` class instances back into a NumPy
+  - `to_numpy`: Convert a list of `Value` class instances back into a NumPy array
   - `one_hot_encode`: Create one-hot encoded vectors from categorical data
 - **Example training**:
   - Examples of `Binary Classification`, `Multiclass Classification`, `Regression` for demonstrating training
