@@ -1,6 +1,6 @@
 # mikegrad
 
-This project implements backpropagation from scratch with additional enhancements and functionality. It is inspired from Andrej Karpathy's ["Neural Networks: Zero to Hero - Micrograd"](https://www.youtube.com/watch?v=VMj-3S1tku0) video.
+A minimal autograd framework with some custom features.
 
 ## Features
 
@@ -30,9 +30,10 @@ This project implements backpropagation from scratch with additional enhancement
   - `from_pandas`: Convert a Pandas DataFrame into a list of `Value` class instances
   - `one_hot_encode`: Create one-hot encoded vectors from categorical data
 - **Example training**:
-  - Examples of `Binary Classification`, `Multiclass Classification`, `Regression` for demonstrating training
+  - Example training on `California Housing` dataset for regression ([toy_classification.ipynb](examples/toy_classification.ipynb)).
+  - Example training on `Breast Canser` dataset for classification ([toy_regression.ipynb](examples/toy_classification.ipynb)).
+  - Examples of `Binary Classification`, `Multiclass Classification`, `Regression` for demonstrating training ([example.ipynb](examples/example.ipynb)).
 
-## TODO
+### Note:
 
-- Refactor the codebase
-- Training loop function
+This project is inspired from Andrej Karpathy's ["Neural Networks: Zero to Hero - Micrograd"](https://www.youtube.com/watch?v=VMj-3S1tku0) video.
