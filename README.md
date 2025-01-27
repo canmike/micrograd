@@ -34,5 +34,4 @@ This project implements backpropagation from scratch with additional enhancement
 ## TODO
 
 - Refactor the codebase
-- Add a regression example with toy dataset
 - Training loop function
