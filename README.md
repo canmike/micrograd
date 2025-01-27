@@ -30,8 +30,8 @@ A minimal autograd framework with some custom features.
   - `from_pandas`: Convert a Pandas DataFrame into a list of `Value` class instances
   - `one_hot_encode`: Create one-hot encoded vectors from categorical data
 - **Example training**:
-  - Example training on `California Housing` dataset for regression ([toy_classification.ipynb](examples/toy_classification.ipynb)).
-  - Example training on `Breast Canser` dataset for classification ([toy_regression.ipynb](examples/toy_classification.ipynb)).
+  - Example training on `California Housing` dataset for regression ([toy_regression.ipynb](examples/toy_regression.ipynb)).
+  - Example training on `Breast Canser` dataset for classification ([toy_classification.ipynb](examples/toy_classification.ipynb)).
   - Examples of `Binary Classification`, `Multiclass Classification`, `Regression` for demonstrating training ([example.ipynb](examples/example.ipynb)).
 
 ### Note:
