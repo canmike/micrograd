@@ -98,6 +98,31 @@ class Value:
 
         return out
 
+    def relu(self):
+        x = self.data
+        r = max(0, x)
+        out = Value(r, (self,), "relu")
+
+        def _backward():
+            self.grad += (x > 0) * out.grad
+
+        out._backward = _backward
+
+        return out
+
+    def leaky_relu(self, negative_slope=0.01):
+        x = self.data
+        r = max(0, x) + negative_slope * min(0, x)
+        out = Value(r, (self,), "leaky_relu")
+
+        def _backward():
+            self.grad += (x > 0) * out.grad
+            self.grad += (x <= 0) * negative_slope * out.grad
+
+        out._backward = _backward
+
+        return out
+
     def log(self):
         x = self.data
         out = Value(math.log(self._clip(x)), (self,), "log")

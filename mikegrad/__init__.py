@@ -1,5 +1,16 @@
 from .engine import Value
-from .utils import log, sigmoid, tanh, exp, one_hot_encode, from_list, to_list, argmax
+from .utils import (
+    log,
+    sigmoid,
+    tanh,
+    relu,
+    leaky_relu,
+    exp,
+    one_hot_encode,
+    from_list,
+    to_list,
+    argmax,
+)
 
 __all__ = [
     "Value",
@@ -8,6 +19,8 @@ __all__ = [
     "log",
     "sigmoid",
     "tanh",
+    "relu",
+    "leaky_relu",
     "exp",
     "one_hot_encode",
     "from_list",

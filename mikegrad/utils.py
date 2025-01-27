@@ -54,3 +54,11 @@ def sigmoid(value: Value):
 
 def tanh(value: Value):
     return value.tanh()
+
+
+def relu(value: Value):
+    return value.relu()
+
+
+def leaky_relu(value: Value, negative_slope=0.01):
+    return value.leaky_relu(negative_slope)

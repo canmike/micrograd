@@ -27,6 +27,24 @@ class Tanh(BaseModule):
         return mg.tanh(x)
 
 
+class ReLU(BaseModule):
+    def forward(self, x):
+        if type(x) == list:
+            return [mg.relu(xi) for xi in x]
+        return mg.relu(x)
+
+
+class LeakyReLU(BaseModule):
+    def __init__(self, negative_slope=0.01):
+        super().__init__()
+        self.negative_slope = negative_slope
+
+    def forward(self, x):
+        if type(x) == list:
+            return [mg.leaky_relu(xi, self.negative_slope) for xi in x]
+        return mg.leaky_relu(x, self.negative_slope)
+
+
 class Softmax(BaseModule):
     def forward(self, x):
         exps = [mg.exp(xi) for xi in x]
