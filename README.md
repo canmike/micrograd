@@ -11,6 +11,8 @@ This project implements backpropagation from scratch with additional enhancement
   - Sigmoid
   - Tanh
   - Softmax
+  - ReLU
+  - LeakyReLU
 - **Loss functions**:
   - CrossEntropyLoss
   - Binary Cross-Entropy Loss (BCELoss)
@@ -26,6 +28,5 @@ This project implements backpropagation from scratch with additional enhancement
 ## TODO
 
 - Refactor the codebase
-- More activation functions
 - Support common optimizers (SGD, Adam)
 - Add examples with toy datasets
