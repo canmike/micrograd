@@ -10,7 +10,9 @@ class BaseOptimizer:
         raise NotImplementedError
 
     def zero_grad(self):
-        raise NotImplementedError
+        for param in self.params:
+            if param.grad is not None:
+                param.grad = 0
 
 
 class SGD(BaseOptimizer):
@@ -33,11 +35,6 @@ class SGD(BaseOptimizer):
         self.nesterov = nesterov
         self.maximize = maximize
         self.momentum_buffers = [None for _ in params]  # One buffer per parameter
-
-    def zero_grad(self):
-        for param in self.params:
-            if param.grad is not None:
-                param.grad = 0
 
     def step(self):
         for i, param in enumerate(self.params):
@@ -69,3 +66,108 @@ class SGD(BaseOptimizer):
                 param.data -= update
 
         return self.params
+
+
+class Adam(BaseOptimizer):
+    def __init__(
+        self,
+        params,
+        lr=0.001,
+        betas=(0.9, 0.999),
+        eps=1e-8,
+        weight_decay=0,
+        amsgrad=False,
+        maximize=False,
+    ):
+        super().__init__()
+        self.params = params
+        self.lr = lr
+        self.B1, self.B2 = betas
+        self.eps = eps
+        self.weight_decay = weight_decay
+        self.amsgrad = amsgrad
+        self.maximize = maximize
+
+        self.m = [0 for _ in params]
+        self.v = [0 for _ in params]
+        self.vmax = [0 for _ in params]
+
+        self.t = 0
+
+    def step(self):
+        self.t += 1
+        for i, param in enumerate(self.params):
+            if param.grad is None:
+                continue
+
+            grad = param.grad
+
+            if self.maximize:
+                grad = -grad
+
+            if self.weight_decay != 0:
+                grad = grad + self.weight_decay * param.data
+
+            self.m[i] = self.B1 * self.m[i] + (1 - self.B1) * grad
+            self.v[i] = self.B2 * self.v[i] + (1 - self.B2) * (grad**2)
+
+            m_hat = self.m[i] / (1 - (self.B1**self.t))
+            v_hat = self.v[i] / (1 - (self.B2**self.t))
+
+            if self.amsgrad:
+                self.vmax[i] = max(self.vmax[i], v_hat)
+                param.data -= self.lr * m_hat / (self.vmax[i] ** 0.5 + self.eps)
+            else:
+                param.data -= self.lr * m_hat / (v_hat**0.5 + self.eps)
+
+
+class AdamW(BaseOptimizer):
+    def __init__(
+        self,
+        params,
+        lr=0.001,
+        betas=(0.9, 0.999),
+        eps=1e-8,
+        weight_decay=0.01,
+        amsgrad=False,
+        maximize=False,
+    ):
+        super().__init__()
+        self.params = params
+        self.lr = lr
+        self.B1, self.B2 = betas
+        self.eps = eps
+        self.weight_decay = weight_decay
+        self.amsgrad = amsgrad
+        self.maximize = maximize
+
+        self.m = [0 for _ in params]
+        self.v = [0 for _ in params]
+        self.vmax = [0 for _ in params]
+
+        self.t = 0
+
+    def step(self):
+        self.t += 1
+        for i, param in enumerate(self.params):
+            if param.grad is None:
+                continue
+
+            grad = param.grad
+
+            if self.maximize:
+                grad = -grad
+
+            param.data -= self.lr * self.weight_decay * param.data
+
+            self.m[i] = self.B1 * self.m[i] + (1 - self.B1) * grad
+            self.v[i] = self.B2 * self.v[i] + (1 - self.B2) * (grad**2)
+
+            m_hat = self.m[i] / (1 - (self.B1**self.t))
+            v_hat = self.v[i] / (1 - (self.B2**self.t))
+
+            if self.amsgrad:
+                self.vmax[i] = max(self.vmax[i], v_hat)
+                param.data -= self.lr * m_hat / (self.vmax[i] ** 0.5 + self.eps)
+            else:
+                param.data -= self.lr * m_hat / (v_hat**0.5 + self.eps)
