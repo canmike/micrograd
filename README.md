@@ -29,3 +29,4 @@ This project implements backpropagation from scratch with additional enhancement
 - More activation functions
 - Support common optimizers (SGD, Adam)
 - Add examples with toy datasets
+- Training loop function
