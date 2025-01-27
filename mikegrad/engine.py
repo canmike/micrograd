@@ -128,7 +128,7 @@ class Value:
         out = Value(math.log(self._clip(x)), (self,), "log")
 
         def _backward():
-            self.grad += (1 / x) * out.grad
+            self.grad += (1 / self._clip(x)) * out.grad
 
         out._backward = _backward
 

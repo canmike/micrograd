@@ -1,6 +1,28 @@
 from mikegrad.engine import Value
 from typing import List
 import math
+import numpy as np
+
+
+def from_pandas(df):
+    """
+    Generate a list of Value objects from a pandas DataFrame.
+    """
+    return from_numpy(df.values)
+
+
+def from_numpy(array):
+    """
+    Generate a list of Value objects from a numpy array.
+    """
+    return from_list(array.tolist())
+
+
+def to_numpy(values):
+    """
+    Generate a numpy array from a list of Value objects.
+    """
+    return np.array(to_list(values))
 
 
 def from_list(values):

@@ -9,6 +9,9 @@ from .utils import (
     one_hot_encode,
     from_list,
     to_list,
+    from_numpy,
+    to_numpy,
+    from_pandas,
     argmax,
 )
 
@@ -25,5 +28,8 @@ __all__ = [
     "one_hot_encode",
     "from_list",
     "to_list",
+    "from_numpy",
+    "to_numpy",
+    "from_pandas",
     "argmax",
 ]
