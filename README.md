@@ -30,3 +30,4 @@ This project implements backpropagation from scratch with additional enhancement
 - Refactor the codebase
 - Support common optimizers (SGD, Adam)
 - Add examples with toy datasets
+- Training loop function
